@@ -2,31 +2,23 @@ package ydkf.niit.cn.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import ydkf.niit.cn.examsystem_stu.R;
+
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AppCompatActivity {
 
     @ViewById(R.id.tv)
     TextView tv_name;
 
     @Click(R.id.showName)
     public void showName() {
-
+        Toast.makeText(this, "nihao ", Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    protected int getContentViewId() {
-        return 0;
-    }
-
-    @Override
-    protected int getFragmentContentId() {
-        return 0;
-    }
 }

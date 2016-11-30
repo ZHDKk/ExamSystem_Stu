@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "ydkf.niit.cn.examsystem_stu"
+        applicationId "ydkf.niit.cn.ui.activity"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
