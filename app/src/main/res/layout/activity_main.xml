@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ydkf.niit.cn.examsystem_stu.ydkf.niit.cn.ui.activity.MainActivity">
+    android:orientation="vertical"
+    tools:context=".MainActivity_">
 
-    <TextView
-        android:id="@+id/tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <FrameLayout
+        android:id="@+id/layFrame"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:transitionName="getFmName">
 
-    <TextView
-        android:id="@+id/showName"
-        android:layout_width="wrap_content"
+        <fragment
+            android:name="ydkf.niit.cn.ui.fragment.LocationFragment_"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/bottom_navigationBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="showName"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:layout_gravity="bottom" />
+
+
+</LinearLayout>
