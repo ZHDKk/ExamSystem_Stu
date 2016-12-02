@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ExamSystem</string>
+    <string name="notice">notice</string>
+    <string name="exam">exam</string>
+    <string name="personal">personal</string>
+</resources>

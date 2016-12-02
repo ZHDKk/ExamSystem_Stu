@@ -12,13 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:transitionName="getFmName">
-
-        <fragment
-            android:name="ydkf.niit.cn.ui.fragment.LocationFragment_"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </FrameLayout>
+        android:transitionName="getFmName"></FrameLayout>
 
     <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/bottom_navigationBar"

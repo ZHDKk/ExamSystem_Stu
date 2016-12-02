@@ -1,4 +1,4 @@
-package ydkf.niit.cn.ui.utils;
+package ydkf.niit.cn.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

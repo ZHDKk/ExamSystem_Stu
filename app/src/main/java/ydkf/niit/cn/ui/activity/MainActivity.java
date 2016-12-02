@@ -3,76 +3,74 @@ package ydkf.niit.cn.ui.activity;
 import android.graphics.Color;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
-import ydkf.niit.cn.ui.fragment.LocationFragment;
-import ydkf.niit.cn.ui.fragment.LocationFragment_;
+import ydkf.niit.cn.ui.fragment.BaseFragment;
+import ydkf.niit.cn.ui.fragment.ExamFragment;
+import ydkf.niit.cn.ui.fragment.ExamFragment_;
+import ydkf.niit.cn.ui.fragment.NoticeFragment;
+import ydkf.niit.cn.ui.fragment.NoticeFragment_;
+import ydkf.niit.cn.ui.fragment.PersonalFragment;
+import ydkf.niit.cn.ui.fragment.PersonalFragment_;
+import ydkf.niit.cn.utils.StatusBarUtil;
 
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener {
+public class MainActivity extends AppActivity implements BottomNavigationBar.OnTabSelectedListener {
     @ViewById(R.id.bottom_navigationBar)
     BottomNavigationBar bottom_navigationBar;
     @ViewById(R.id.layFrame)
     FrameLayout frameLayout;
-    LocationFragment mLocationFragment;
+    ExamFragment examFragment;
+    NoticeFragment noticeFragment;
+    PersonalFragment personalFragment;
 
     @AfterViews
-    void setBngBar() {
-        bottom_navigationBar.addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "通知").setActiveColor(Color.BLUE))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "考试").setActiveColor(Color.GRAY))
-                .addItem(new BottomNavigationItem(R.mipmap.ic_launcher, "个人").setActiveColor(Color.GREEN));
+    void initViews() {
+        examFragment = new ExamFragment_();
+        noticeFragment = new NoticeFragment_();
+        personalFragment = new PersonalFragment_();
+        bottom_navigationBar.setMode(BottomNavigationBar.MODE_SHIFTING).setBackgroundStyle(BottomNavigationBar.BACKGROUND_STYLE_RIPPLE);
+        bottom_navigationBar.addItem(new BottomNavigationItem(R.mipmap.navigation_notice, getString(R.string.notice)).setActiveColorResource(R.color.colorPrimaryDark))
+                .addItem(new BottomNavigationItem(R.mipmap.navigation_exam, getString(R.string.exam)).setActiveColorResource(R.color.colorPrimary))
+                .addItem(new BottomNavigationItem(R.mipmap.navigation_personal, getString(R.string.personal)).setActiveColorResource(R.color.colorAccent)).setFirstSelectedPosition(1).initialise();
         bottom_navigationBar.setTabSelectedListener(this);
-        setDefaultFragment();
-    }
-
-    private void setDefaultFragment() {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.layFrame, LocationFragment_.builder().build());
-        transaction.commit();
     }
 
     @Override
     public void onTabSelected(int position) {
-        FragmentManager fm = getSupportFragmentManager();
-        //开启事务
-        FragmentTransaction transaction = fm.beginTransaction();
         switch (position) {
-//            case 0:
-//                if (mLocationFragment == null) {
-//                    mLocationFragment = LocationFragment.newInstance("通知");
-//                }
-//                transaction.replace(R.id.tb, mLocationFragment);
-//                break;
-//            case 1:
-//                if (mFindFragment == null) {
-//                    mFindFragment = FindFragment.newInstance("考试");
-//                }
-//                transaction.replace(R.id.tb, mFindFragment);
-//                break;
-//            case 2:
-//                if (mFavoritesFragment == null) {
-//                    mFavoritesFragment = FavoritesFragment.newInstance("个人");
-//                }
-//                transaction.replace(R.id.tb, mFavoritesFragment);
-//                break;
-//            default:
-//                break;
+            case 0:
+                StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimaryDark));
+                if (noticeFragment == null) {
+                    noticeFragment = NoticeFragment_.newInstance(getString(R.string.notice));
+                }
+                addFragment(noticeFragment);
+                break;
+            case 1:
+                StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+                if (examFragment == null) {
+                    examFragment = ExamFragment_.newInstance(getString(R.string.exam));
+                }
+                addFragment(examFragment);
+                break;
+            case 2:
+                StatusBarUtil.setColor(this, getResources().getColor(R.color.colorAccent));
+                if (personalFragment == null) {
+                    personalFragment = PersonalFragment_.newInstance(getString(R.string.personal));
+                }
+                addFragment(personalFragment);
+                break;
+            default:
+                break;
         }
-        // 事务提交
-        transaction.commit();
     }
 
     @Override
@@ -83,5 +81,19 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     @Override
     public void onTabReselected(int position) {
 
+    }
+
+    @Override
+    protected BaseFragment getFirstFragment() {
+        if (examFragment == null) {
+            examFragment = ExamFragment_.newInstance(getString(R.string.exam));
+        }
+        return examFragment;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        removeFragment();
     }
 }

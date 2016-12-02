@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">考试系统</string>
+    <string name="notice">通知</string>
+    <string name="exam">考试</string>
+    <string name="personal">个人</string>
+</resources>
